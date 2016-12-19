@@ -1,0 +1,79 @@
+body {
+  font-family: $font-stack;
+  color: $main-color;
+  font-size: 16px;
+  line-height: 150%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #fff;
+  // margin: 0 auto;
+  // text-align: center;
+  // margin: 25vh auto;
+  // margin-top: 25vh;
+}
+footer,
+header,
+section {
+  > div {
+    box-sizing: border-box;
+    max-width: 1080px;
+    min-width: 320px;
+    padding: 0 12px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+a,
+button,
+input {
+  transition: 0.25s;
+}
+img {
+  width: 100%;
+  height: auto;
+}
+h1 {
+  font-size: 20px;
+}
+h2 {
+  font-size: 18px;
+}
+p {
+  font-size: 16px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-weight: 100;
+}
+.top10 {
+  margin-top: 10vh;
+}
+.top25 {
+  margin-top: 25vh;
+}
+button,
+input {
+  background-color: transparent;
+  border: 1px solid #000;
+  padding: 6px 12px;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+  border-radius: 0;
+}
+.mail-input-box,
+input {
+  width: 300px;
+  border-radius: 0;
+}
+button:focus,
+button:hover,
+input[type="submit"]:focus,
+input[type="submit"]:hover {
+  color: #fff;
+  background-color: #000;
+}
