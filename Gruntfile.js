@@ -93,17 +93,17 @@ module.exports = function(grunt) {
       }
     },
 
-    jshint: {
-      files: ['src/js/main.js'],
-      options: {
-        globals: {
-          jQuery: false,
-          console: true,
-          module: true,
-          document: true
-        }
-      }
-    },
+    // jshint: {
+    //   files: ['src/js/main.js'],
+    //   options: {
+    //     globals: {
+    //       jQuery: false,
+    //       console: true,
+    //       module: true,
+    //       document: true
+    //     }
+    //   }
+    // },
 
     concat: {
       options: {
@@ -179,14 +179,15 @@ module.exports = function(grunt) {
 
   // load tasks
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks("grunt-handlebars-layouts");
   grunt.loadNpmTasks('grunt-html-prettyprinter');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-postcss');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
+  // grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
+  // grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   // grunt.loadNpmTasks('grunt-sitemap-xml');
@@ -194,7 +195,9 @@ module.exports = function(grunt) {
 
   // commands
   grunt.registerTask('default', ['build', 'serve']);
-  grunt.registerTask('js', ['jshint', 'concat', 'uglify']);
+  // grunt.registerTask('js', ['jshint', 'concat', 'uglify']);
+  // removed jshint and also removed uglify which does not accept ES6 syntax
+  grunt.registerTask('js', ['concat']);
   grunt.registerTask('serve', ['connect', 'watch']);
   grunt.registerTask('build', ['clean:dist', 'copy', 'handlebarslayouts', 'sass', 'postcss', 'js', 'clean:temp']);
 
