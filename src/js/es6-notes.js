@@ -57,15 +57,108 @@ const pizza = 'Deep Dish 🍕🍕🍕'; // Uncaught ReferenceError: pizza is not
 // Arrow functions - three benefits:
 // 1. more concise
 // 2. implicit returns
-// 3. doesn't rebind the value of 'this' when you use an arrow
-// function inside of another function
+// 3. doesn't rebind the value of 'this' when you use an arrow function inside of another function
 
-const names = ['Michael', 'Janet'];
+const names = ['Michael', 'Janet', 'Tito'];
+
 // before arrow functions:
 const fullNames = names.map(function(name) {
   return `${name} Jackson`;
-})
+});
 console.log(fullNames);
+
+// arrow function - delete the word 'function', add fat arrow:
+const fullNames2 = names.map((name) => {
+  return `${name} Jackson`;
+});
+console.log(fullNames2);
+
+// if only one paramater ie (name), don't need second parantheses (optional stylistic choice):
+const fullNames3 = names.map(name => {
+  return `${name} Jackson`;
+});
+console.log(fullNames3);
+
+// implicit return - move it up, remove 'return', remove curly brackets
+const fullNames4 = names.map(name => `${name} Jackson`);
+console.log(fullNames4);
+
+// if you have no arguments, pass empty parantheses:
+const fullNames5 = names.map(() => `Original Jackson`);
+console.log(fullNames5);
+
+// note arrow functions are always anonymous functions.
+// but you can put them into a variable:
+const sayMyName = (name) => { console.log(`Hello ${name}!`) };
+sayMyName('Zac');
+
+
+// more arrow functions:
+const race = '100m Dash';
+const winners = ['Hunter Gath', 'Singa Song', 'Imda Bos'];
+
+// if we remove the curly brackets for an implicit return, how do we deal with an {object literal}, not a {function block}? Wrap in parantheses.
+const win = winners.map((winner, i) => ({name: winner, race: race, place: i + 1}))
+
+console.table(win); // console.table is cool.
+// note, another feature of es6 is that {race: race} above can be replaced with {race}.
+
+const ages = [23, 62, 45, 234, 2, 62, 234, 62, 34];
+const old = ages.filter(age => age >= 60);
+const young = ages.filter(age => age < 60);
+console.log(old);
+console.log(young);
+
+// arrow functions and 'this'
+const box = document.querySelector('.box');
+
+// don't use an arrow function:
+const box2 = document.querySelector('.box');
+box2.addEventListener('click', () => {console.log(this)});
+// 'this' is 'window' because with arrow functions 'this' is not rebound inside of that function - it's inherited from whatever the parent scope is. Don't use an arrow function here.
+
+// es6 arrow functions to avoid self or that...
+const box = document.querySelector('.box');
+box.addEventListener('click', function() {
+  console.log(this); // 'this' is box
+  this.classList.toggle('opening');
+  setTimeout(function() {
+    console.log(this.classList); // undefined
+    console.log(this); // window
+    // these two behave this way because the setTimout function here is not bound to anything
+    this.classList.toggle('open');
+  })
+});
+
+// the old way in es5:
+box.addEventListener('click', function() {
+  var self = this; // or var that = this;
+  this.classList.toggle('opening');
+  setTimeout(function() {
+    self.classList.toggle('open');
+  })
+});
+
+// with es6 we can use an arrow function because it's scoped to its parent. It will inherit the value of 'this'. We can use an arrow function inside of another function because it will inherit the value of 'this'.
+box.addEventListener('click', function() {
+  let first = 'opening';
+  let second = 'open';
+
+  if(this.classList.contains(first)) {
+    [first, second] = [second, first]; // es6 trick to swap variables
+  }
+
+  this.classList.toggle(first);
+  setTimeout(() => {
+    console.log(this);
+    this.classList.toggle(second);
+}, 500);
+});
+
+
+
+
+
 
 // exercises:
 
