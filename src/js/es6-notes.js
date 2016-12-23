@@ -139,7 +139,7 @@ box.addEventListener('click', function() {
   })
 });
 
-// with es6 we can use an arrow function because it's scoped to its parent. It will inherit the value of 'this'. We can use an arrow function inside of another function because it will inherit the value of 'this'.
+// with es6 we can use an arrow function because it's scoped to its parent. We can use an arrow function inside of another function because it will inherit the value of 'this'.
 box.addEventListener('click', function() {
   let first = 'opening';
   let second = 'open';
@@ -156,6 +156,28 @@ box.addEventListener('click', function() {
 });
 
 
+// Default function arguments...
+// from:
+function calculateBill(total, tax, tip) {
+  if(tax === undefined) {tax = .13};
+  if(tip === undefined) {tip = .15};
+  return total + (total * tax) + (total * tip);
+}
+const totalBill = calculateBill(100);
+
+// to
+function calculateBill(total, tax, tip) {
+  tax = tax || .13;
+  tip = tip || .15;
+  return total + (total * tax) + (total * tip);
+}
+const totalBill = calculateBill(100);
+
+// to
+function calculateBill(total, tax = .13, tip = .15) {
+  return total + (total * tax) + (total * tip);
+}
+const totalBill = calculateBill(100, undefined, .25);
 
 
 
