@@ -179,7 +179,78 @@ function calculateBill(total, tax = .13, tip = .15) {
 }
 const totalBill = calculateBill(100, undefined, .25);
 
+// when you don't want an arrow function - not having the keyword 'this'.
+// when you really need `this`
+const button = document.querySelector(#pushy); // button with id="pushy"
+button.addEventListener('click', () => {
+  console.log(this); // window because this is not bound to the function
+  this.classList.toggle('on');
+}); // TypeError: cannot read property 'toggle' of undefined
+// refactor without arrow function:
+const button = document.querySelector(#push);
+button.addEventListener('click', function() {
+  console.log(this);
+  this.classList.toggle('on');
+});
 
+// when you need a method to bind to an object
+const person = {
+  points: 23,
+  score: () => {
+    console.log(this); // window
+    this.points++;
+  }
+}
+// refactor without arrow function:
+const person = {
+  points: 23,
+  score: function() {
+    console.log(this);
+    this.points++;
+  }
+}
+// refactor when you have a method on an object:
+const person = {
+  points: 23,
+  score() {
+    console.log(this);
+    this.points++;
+  }
+}
+
+// when you need to add a prototype method
+class Car {
+  constructor(make, colour) {
+    this.make = make;
+    this.colour = colour;
+  }
+}
+const beemer = new Car('bmw', 'blue');
+const subie = new Car('subaru', 'white');
+Car.prototype.summarize = () => {
+  return `This car is a ${this.make} in the colour ${this.colour}`;
+}; // we need the keyword 'this' so an arrow function won't work
+// refactor without arrow function:
+Car.prototype.summarize = function() {
+  return `This car is a ${this.make} in the colour ${this.colour}`;
+};
+
+// when you need arguments object (we don't have access to the arguments object when we use an arrow function)
+const orderChildren = () => {
+  const children = Array.from(arguments);
+  return children.map((child, i) => {
+    return `${child} was child #${i + 1}`;
+  })
+  console.log(arguments);
+}
+again, refactor without the arrow function
+const orderChildren = function() {
+  const children = Array.from(arguments);
+  return children.map((child, i) => {
+    return `${child} was child #${i + 1}`;
+  })
+  console.log(arguments);
+}
 
 
 // exercises:
