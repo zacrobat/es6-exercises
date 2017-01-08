@@ -273,3 +273,16 @@ const orderChildren = function() {
 
   console.log(filtered);
   // 🔥 This can also be done in a single .reduce(), but we're practicing arrow functions here, so chain them!
+
+  // .map() and nested arrays? .map() your .map()
+  const nestedArray = [
+    [
+      [1, 2],
+      [3, 4]
+    ],
+    [
+      [5, 6],
+      [7, 8]
+    ]
+  ]
+  const doubledNestedArray = nestedArray.map(subarray => subarray.map(part => part.map(particle => particle * 2)))
